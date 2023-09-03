@@ -1,4 +1,5 @@
 import React from 'react';
+import { v1 as uuidv1 } from 'uuid';
 
 export interface ExtractedData {
   invoiceNumber: string;
@@ -119,7 +120,7 @@ const ExtractedDataDisplay: React.FC<ExtractedDataDisplayProps> = ({
             </tr>
             {extractedData?.lineItems.map((lineItem, index) => (
               <>
-                <tr className="border-b bg-indigo-600">
+                <tr className="border-b bg-indigo-600" key={uuidv1()}>
                   <td
                     className="px-6 py-4 font-medium whitespace-nowrap text-white"
                     colSpan={3}
@@ -127,7 +128,7 @@ const ExtractedDataDisplay: React.FC<ExtractedDataDisplayProps> = ({
                     {`Line Item ${index + 1}`}
                   </td>
                 </tr>
-                <tr className=" border-b bg-indigo-500 ">
+                <tr className=" border-b bg-indigo-500 " key={uuidv1()}>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium whitespace-nowrap text-white"
@@ -136,7 +137,7 @@ const ExtractedDataDisplay: React.FC<ExtractedDataDisplayProps> = ({
                   </th>
                   <td className="px-6 py-4">{lineItem?.description || ''}</td>
                 </tr>
-                <tr className=" border-b bg-indigo-500 ">
+                <tr className=" border-b bg-indigo-500 " key={uuidv1()}>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium whitespace-nowrap text-white"
@@ -145,7 +146,7 @@ const ExtractedDataDisplay: React.FC<ExtractedDataDisplayProps> = ({
                   </th>
                   <td className="px-6 py-4">{lineItem?.quantity || ''}</td>
                 </tr>
-                <tr className=" border-b bg-indigo-500 ">
+                <tr className=" border-b bg-indigo-500 " key={uuidv1()}>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium whitespace-nowrap text-white"
@@ -154,12 +155,12 @@ const ExtractedDataDisplay: React.FC<ExtractedDataDisplayProps> = ({
                   </th>
                   <td className="px-6 py-4">{lineItem?.unitPrice || ''}</td>
                 </tr>
-                <tr className=" border-b bg-indigo-500 ">
+                <tr className=" border-b bg-indigo-500 " key={uuidv1()}>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium whitespace-nowrap text-white"
                   >
-                    Total Amount
+                    Amount
                   </th>
                   <td className="px-6 py-4">{lineItem?.totalAmount || ''}</td>
                 </tr>
