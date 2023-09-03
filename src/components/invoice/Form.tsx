@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 
 type InvoiceFormProps = {
   onSearch: (
@@ -7,6 +8,12 @@ type InvoiceFormProps = {
     fileValidation: boolean
   ) => Promise<void>;
   isLoading: boolean;
+};
+
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  borderColor: 'red',
 };
 
 const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSearch, isLoading }) => {
@@ -58,12 +65,27 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSearch, isLoading }) => {
           </div>
           <div className="flex justify-center">
             <button
-              className={`border-2 px-3 py-2 border-indigo-400 rounded-md ${
-                !fileValidation || !invoiceNum ? 'opacity-50' : 'opacity-100'
+              className={`border-2 px-3 py-2 border-indigo-400 rounded-md flex justify-center items-center ${
+                !fileValidation || !invoiceNum || isLoading
+                  ? 'opacity-50'
+                  : 'opacity-100'
               }`}
               disabled={!fileValidation || !invoiceNum || isLoading}
             >
-              Validate
+              {isLoading ? (
+                <>
+                  <div className="px-5">
+                    <ClipLoader
+                      color={'#330099'}
+                      loading={isLoading}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  </div>
+                </>
+              ) : (
+                'Validate'
+              )}
             </button>
           </div>
         </form>
