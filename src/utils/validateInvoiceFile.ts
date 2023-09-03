@@ -1,8 +1,8 @@
 export default async function validateInvoiceFile(invoiceNum: string) {
   try {
-    // setGeneratingImg(true);
     const response = await fetch(
-      `http://localhost:5000/api/v2/validate-invoice/invoice-image/${invoiceNum}`,
+      //   `http://localhost:5000/api/v2/validate-invoice/invoice-image/${invoiceNum}`,
+      `https://sapathon-test-server.onrender.com/api/v2/validate-invoice/invoice-image/${invoiceNum}`,
       {
         method: 'GET',
         headers: {
@@ -15,7 +15,4 @@ export default async function validateInvoiceFile(invoiceNum: string) {
   } catch (error) {
     alert(error);
   }
-  //   finally {
-  //     setGeneratingImg(false);
-  //   }
 }
