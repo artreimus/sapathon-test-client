@@ -6,9 +6,10 @@ type InvoiceFormProps = {
     invoiceNum: string,
     fileValidation: boolean
   ) => Promise<void>;
+  isLoading: boolean;
 };
 
-const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSearch }) => {
+const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSearch, isLoading }) => {
   const [invoiceNum, setInvoiceNum] = useState<string>('');
   const [fileValidation, setIsFileValidation] = useState(false);
 
@@ -56,7 +57,12 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({ onSearch }) => {
             />
           </div>
           <div className="flex justify-center">
-            <button className="border-2 px-3 py-2 border-indigo-400 rounded-md">
+            <button
+              className={`border-2 px-3 py-2 border-indigo-400 rounded-md ${
+                !fileValidation || !invoiceNum ? 'opacity-50' : 'opacity-100'
+              }`}
+              disabled={!fileValidation || !invoiceNum || isLoading}
+            >
               Validate
             </button>
           </div>

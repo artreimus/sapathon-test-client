@@ -7,6 +7,7 @@ import ExtractedDataDisplay, { ExtractedData } from '../display/ExtractedData';
 const Invoice: React.FC = () => {
   const [openAIMessage, setOpenAIMessage] = useState('');
   const [extractedData, setExtractedData] = useState<ExtractedData>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSearch = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -14,6 +15,7 @@ const Invoice: React.FC = () => {
     fileValidation: boolean
   ) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (!invoiceNum) return;
 
@@ -26,19 +28,15 @@ const Invoice: React.FC = () => {
       setOpenAIMessage(res.openAIData.message.content);
     }
 
-    console.log(res.extractedData);
-
     if (res?.extractedData) {
       setExtractedData(res.extractedData);
     }
+    setIsLoading(false);
   };
-
-  console.log(extractedData);
-  console.log(openAIMessage);
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <InvoiceForm onSearch={onSearch} />
+      <InvoiceForm onSearch={onSearch} isLoading={isLoading} />
       <ExtractedDataDisplay extractedData={extractedData} />
       <OpenAIDataDisplay openAIMessage={openAIMessage} />
     </div>
